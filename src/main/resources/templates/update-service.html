@@ -1,0 +1,111 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Update Service</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Update Service Post</h1>-->
+<!--<form th:action="@{/post-service/update/{id}(id=${servicePost.id})}" th:object="${servicePost}" method="post">-->
+<!--    <label>Description:</label>-->
+<!--    <input type="text" th:field="*{description}" required/><br/>-->
+
+<!--    <label>Photo URL:</label>-->
+<!--    <input type="text" th:field="*{photoUrl}" required/><br/>-->
+
+<!--    <label>Email:</label>-->
+<!--    <input type="email" th:field="*{email}" required/><br/>-->
+
+<!--    <label>Phone Number:</label>-->
+<!--    <input type="text" th:field="*{phoneNumber}" required/><br/>-->
+
+<!--    <label>Price:</label>-->
+<!--    <input type="number" th:field="*{price}" required/><br/>-->
+<!--    <label>City:</label>-->
+<!--    <input type="city" th:field="*{city}" required/><br/>-->
+<!--    <label>Rating:</label>-->
+<!--    <input type="number" th:field="*{rating}" step="0.1" max="5" required/><br/>-->
+
+<!--    <button type="submit">Update</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Mittra - Home Service Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #eee;
+        }
+        .service-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navBar_Wraper">
+    <div class="logo_wrapper">
+        <img src="./image/logos.png" alt="E-Mittra Logo">
+    </div>
+</nav>
+
+<div class="content">
+    <h1>Update Service Post</h1>
+    <form th:action="@{/post-service/update/{id}(id=${servicePost.id})}" th:object="${servicePost}" method="post">
+        <label>Description:</label>
+        <input type="text" th:field="*{description}" required/><br/>
+
+        <label>Photo URL:</label>
+        <input type="text" th:field="*{photoUrl}" required/><br/>
+
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required/><br/>
+
+        <label>Phone Number:</label>
+        <input type="text" th:field="*{phoneNumber}" required/><br/>
+
+        <label>Price:</label>
+        <input type="number" th:field="*{price}" required/><br/>
+        <label>City:</label>
+        <input type="text" th:field="*{city}" required/><br/>
+        <label>Rating:</label>
+        <input type="number" th:field="*{rating}" step="0.1" max="5" required/><br/>
+
+        <button type="submit">Update</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alertElements = document.querySelectorAll('.alert');
+        alertElements.forEach(alert => {
+            setTimeout(() => {
+                alert.style.transition = 'opacity 1s';
+                alert.style.opacity = '0';
+            }, 3000);
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 4000);
+        });
+    });
+</script>
+
+</body>
+</html>

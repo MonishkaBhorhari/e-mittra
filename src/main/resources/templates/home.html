@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Mittra - Home Service Platform</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ775/xCINHoKiL8VUVgvGAjGLnrp5pTeClJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+<nav class="navBar_Wraper">
+    <div class="logo_wrapper">
+
+        <img th:src="@{/image/logo.png}" alt="E-Mittra Logo" onerror="this.onerror=null; this.src='/image/default-logo.png';">
+
+    </div>
+    <div class="links_wrapper">
+        <a href="/">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Packages</a>
+        <a href="#">Contact Us</a>
+    </div>
+    <div class="btn_wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <div class="buttons">
+            <div sec:authorize="!isAuthenticated()">
+                <button class="login"><a href="/login" style="text-decoration: none; color: white;">Login</a></button>
+                <button class="Sign_in"><a href="/register" style="text-decoration: none; color: white;">Sign Up</a></button>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <button class="logout"><a href="/logout" style="text-decoration: none; color: white;">Logout</a></button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+    <h1>Welcome to E-Mittra - Home Service Platform</h1>
+
+    <!-- Success and Error Messages -->
+    <div th:if="${successMessage}" class="alert">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" class="alert error">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <h2>Available Services</h2>
+    <div th:if="${services.size() == 0}">
+        <p>No services available at the moment.</p>
+    </div>
+    <div th:unless="${services.size() == 0}" class="service-list">
+        <div th:each="service : ${services}" class="service-item">
+<!--            <img th:src="${service.photoUrl}" alt="Service Photo" class="img-fluid"/>-->
+            <img th:src="@{${service.photoUrl}}" alt="Service Photo" class="img-fluid"/>
+            <h3 th:text="${service.description}">Description</h3>
+            <p>Price: ₹<span th:text="${service.price}"></span></p>
+            <p>City: <span th:text="${service.city}"></span></p>
+            <p>Rating: <span th:text="${service.rating}"></span>/5</p>
+            <a th:href="@{/buy-service/{id}(id=${service.id})}" class="buy-button">Buy Now</a>
+<!--            <a th:href="@{//post-service/delete/{id}(id=${service.id})}"class="delete-buuton">delete</a>-->
+            <a href="post-service/delete/{service.id}}" onclick="deleteService(${service.id})" class="delete-button">Delete</a>
+            <!-- Show email and phone number only if logged in -->
+            <div sec:authorize="isAuthenticated()">
+                <p>Email: <span th:text="${service.email}"></span></p>
+                <p>Phone: <span th:text="${service.phoneNumber}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script th:src="@{/jss/home.js}"></script>
+
+</body>
+</html>

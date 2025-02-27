@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Company Registration</title>
+</head>
+<body>
+<h2>Register as Company</h2>
+<form th:action="@{/provider/sign-up}" method="post" th:object="${signupRequestDTO}">
+    <label for="name">Company Name:</label>
+    <input type="text" id="name" th:field="*{name}" required />
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}" required />
+    <label>City:</label>
+    <input type="city"  id ="city"th:field="*{city}" required/><br/>
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" th:field="*{phone}" required />
+
+    <label for="password"><Pa></Pa>ssword:</label>
+    <input type="password" id="password" th:field="*{password}" required />
+
+    <button type="submit">Sign Up</button>
+</form>
+<p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>PAN Verification</title>-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>PAN Verification</h2>-->
+<!--<form id="panForm">-->
+<!--    <label for="panNumber">Enter PAN Number:</label>-->
+<!--    <input type="text" id="panNumber" name="panNumber" required>-->
+<!--    <button type="submit">Verify</button>-->
+<!--</form>-->
+
+<!--<div id="result"></div>-->
+
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        $("#panForm").submit(function(e){-->
+<!--            e.preventDefault();-->
+<!--            var panNumber = $("#panNumber").val();-->
+
+<!--            $.ajax({-->
+<!--                url: "/api/pan/verify",-->
+<!--                type: "POST",-->
+<!--                contentType: "application/json",  // ✅ JSON format भेजना होगा-->
+<!--                data: JSON.stringify({ panNumber: panNumber }),  // ✅ JSON फॉर्मेट में भेजें-->
+<!--                success: function(response) {-->
+<!--                    console.log("API Response:", response);  // ✅ Debugging के लिए-->
+
+<!--                    if (response && response.data) {-->
+<!--                        $("#result").html(-->
+<!--                            "<p><strong>Message:</strong> " + response.message + "</p>" +-->
+<!--                            "<p><strong>Status:</strong> " + response.data.status + "</p>" +-->
+<!--                            "<p><strong>Name:</strong> " + response.data.name + "</p>" +-->
+<!--                            "<p><strong>PAN:</strong> " + response.data.pan + "</p>"-->
+<!--                        );-->
+<!--                    } else {-->
+<!--                        $("#result").html("<p>Invalid response received</p>");-->
+<!--                    }-->
+<!--                },-->
+<!--                error: function(xhr, status, error){-->
+<!--                    console.log("Error:", error);-->
+<!--                    $("#result").html("<p style='color: red;'>Error verifying PAN: " + xhr.responseText + "</p>");-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PAN Verification</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h2>PAN Verification</h2>
+<form id="panForm">
+    <label for="panNumber">Enter PAN Number:</label>
+    <input type="text" id="panNumber" name="panNumber" required>
+    <button type="submit">Verify</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+    $(document).ready(function(){
+        $("#panForm").submit(function(e){
+            e.preventDefault();  // ✅ Form को Default Submit होने से रोकें
+
+            var panNumber = $("#panNumber").val();
+
+            $.ajax({
+                url: "/api/pan/verify",
+                type: "POST",
+                contentType: "application/json",  // ✅ API JSON ही लेगा
+                data: JSON.stringify({ panNumber: panNumber }),  // ✅ JSON में Convert करें
+                success: function(response) {
+                    console.log("API Response:", response);
+                    $("#result").html("<p>Verified: " + response + "</p>");
+                },
+                error: function(xhr) {
+                    console.log("Error:", xhr.responseText);
+                    $("#result").html("<p style='color:red;'>Error: " + xhr.responseText + "</p>");
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

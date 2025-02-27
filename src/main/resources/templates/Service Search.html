@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Search</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+<div class="search-container">
+    <h2>Search for Services</h2>
+    <form action="/service-posts/filter" method="get">
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" id="category" name="category" placeholder="Enter category" value="${category}">
+        </div>
+        <div class="form-group">
+            <label for="city">City</label>
+            <select id="city" name="city">
+                <option value="">Select City</option>
+                <option value="City1" th:selected="${city == 'City1'}">City1</option>
+                <option value="City2" th:selected="${city == 'City2'}">City2</option>
+                <!-- Add more cities as required -->
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="search-button">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="results-container">
+    <h3>Search Results</h3>
+    <div th:each="servicePost : ${servicePosts}">
+        <div class="service-card">
+            <h4 th:text="${servicePost.description}"></h4>
+            <p th:text="${servicePost.city}"></p>
+            <p th:text="${servicePost.category}"></p>
+            <p th:text="${servicePost.price}"></p>
+            <!-- Add more details as required -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

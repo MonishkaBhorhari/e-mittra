@@ -1,0 +1,145 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Buy Service</title>-->
+<!--    <style>-->
+<!--        body { font-family: Arial, sans-serif; background-color: #121212; color: #eee; }-->
+<!--        .container { max-width: 800px; margin: 20px auto; padding: 20px; background: #1f1f1f; border-radius: 10px; }-->
+<!--        h1, h2 { color: #4caf50; }-->
+<!--        .details { margin-bottom: 20px; }-->
+<!--        button { background-color: #4caf50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }-->
+<!--        button:hover { background-color: #388e3c; }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h1>Buy Service</h1>-->
+<!--    <div class="details">-->
+<!--        <h2 th:text="${servicePost.description}">Service Description</h2>-->
+<!--        <p>Email: <span th:text="${servicePost.email}">Email</span></p>-->
+<!--        <p>Phone: <span th:text="${servicePost.phoneNumber}">Phone</span></p>-->
+<!--        <p>Price: ₹<span th:text="${servicePost.price}">Price</span></p>-->
+<!--    </div>-->
+<!--    <form th:action="@{/buy-service/{id}(id=${servicePost.id})}" method="post">-->
+<!--        <button type="submit">Proceed to Payment</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Service</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #eee;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1f1f1f;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            color: #4caf50;
+        }
+
+        .details {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #4caf50;
+            padding-bottom: 10px;
+        }
+
+        .payment-methods {
+            margin: 20px 0;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: #333;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .payment-method:hover {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        input[type="radio"] {
+            accent-color: #4caf50;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Buy Service</h1>
+
+    <!-- Service Details -->
+    <div class="details">
+        <h2 th:text="${servicePost.description}">Service Description</h2>
+        <p>Email: <span th:text="${servicePost.email}">Email</span></p>
+        <p>Phone: <span th:text="${servicePost.phoneNumber}">Phone</span></p>
+        <p>Price: ₹<span th:text="${servicePost.price}">Price</span></p>
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="payment-methods">
+        <h2>Select Payment Method</h2>
+        <form th:action="@{/buy-service/{id}(id=${servicePost.id})}" method="post">
+            <label class="payment-method">
+                <input type="radio" name="paymentMethod" value="Credit/Debit Card" required>
+                Credit/Debit Card
+            </label>
+            <label class="payment-method">
+                <input type="radio" name="paymentMethod" value="PayPal" required>
+                PayPal
+            </label>
+            <label class="payment-method">
+                <input type="radio" name="paymentMethod" value="UPI" required>
+                UPI
+            </label>
+            <label class="payment-method">
+                <input type="radio" name="paymentMethod" value="Net Banking" required>
+                Net Banking
+            </label>
+
+            <button type="submit">Proceed to Payment</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

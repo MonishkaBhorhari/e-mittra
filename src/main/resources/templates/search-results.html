@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+<h1>Services Available in <span th:text="${city}">City</span></h1>
+
+<div th:if="${services.size() == 0}">
+    <p>No services available for the selected city.</p>
+</div>
+
+<div th:unless="${services.size() == 0}">
+    <ul>
+        <li th:each="service : ${services}">
+            <h3 th:text="${service.description}">Service Description</h3>
+            <p>Email: <span th:text="${service.email}"></span></p>
+            <p>Phone: <span th:text="${service.phoneNumber}"></span></p>
+            <p>Price: <span th:text="${service.price}"></span></p>
+            <p>Rating: <span th:text="${service.rating}"></span>/5</p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chatbot</title>
+    <link rel="stylesheet" href=" css/chat.css">
+</head>
+<body>
+<h1>Chatbot</h1>
+<div id="chat-window">
+    <ul>
+        <li th:each="message : ${messages}">
+            <strong th:text="${message.sender}"></strong>:
+            <span th:text="${message.message}"></span>
+            <small th:text="${#dates.format(message.timestamp, 'HH:mm')}"></small>
+        </li>
+    </ul>
+</div>
+<form th:action="@{/chat}" th:object="${newMessage}" method="post">
+    <input type="text" th:field="*{sender}" placeholder="Your name" required>
+    <input type="text" th:field="*{message}" placeholder="Type your message" required>
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>

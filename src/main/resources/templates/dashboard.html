@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Service Provider Dashboard</title>
+</head>
+<body>
+<h1>Welcome to Your Dashboard</h1>
+
+<div>
+    <h2>Your Services</h2>
+    <div th:if="${services.size() == 0}">
+        <p>No services available.</p>
+    </div>
+    <div th:unless="${services.size() == 0}">
+        <ul>
+            <li th:each="service : ${services}">
+                <h3 th:text="${service.description}"></h3>
+                <p>Price: ₹<span th:text="${service.price}"></span></p>
+                <p>City: <span th:text="${service.city}"></span></p>
+                <p>Rating: <span th:text="${service.rating}"></span>/5</p>
+                <a th:href="@{/post-service/update/{id}(id=${service.id})}">Update</a>
+                <a th:href="@{/post-service/delete/{id}(id=${service.id})}" onclick="return confirm('Are you sure?');">Delete</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<a href="/post-service">Post a New Service</a>
+</body>
+</html>
